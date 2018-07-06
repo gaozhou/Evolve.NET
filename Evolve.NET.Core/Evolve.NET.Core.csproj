@@ -50,10 +50,10 @@
     <Compile Include="IMutation.cs" />
     <Compile Include="IPopulation.cs" />
     <Compile Include="ISelection.cs" />
-    <Compile Include="OnePointCrossoverOperator.cs" />
+    <Compile Include="SinglePointCrossoverOperator.cs" />
     <Compile Include="Population.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResetingRandomMutationOperator.cs" />
+    <Compile Include="RandomResettingMutationOperator.cs" />
     <Compile Include="RoulleteSelection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,9 +2,11 @@
 {
     public class GeneticAlgorithm
     {
-        private IPopulation m_Population;
+        public IPopulation Population { get; set; }
 
         public ISelection Selection { get; set; }
+
+        public double ElitismPercentage { get; set; }
 
         public ICrossover Crossover { get; set; }
 
@@ -14,35 +16,45 @@
 
         public IDebug Debug { get; set; }
 
-        public void Simulate(int count, int length, int min, int max, int maxGeneration)
+        private void Elite()
         {
-            m_Population = new Population(count, length, min, max);
-            m_Population.Evaluate(Fitness);
-            Debug.Log(m_Population);
+            int eliteCount = (int)(ElitismPercentage * Population.Count);
+            for (int i = 0; i < eliteCount; i++)
+                Population.AddChromosomeInNewPopulation(Population[i]);
+        }
 
-            while (m_Population.Generation < maxGeneration)
+        public void Simulate(int maxGeneration)
+        {
+            Population.Evaluate(Fitness);
+
+            if (Debug != null)
+                Debug.Log(Population);
+
+            while (Population.Generation < maxGeneration)
             {
+                Elite();
+
                 do
                 {
-                    IChromosome parent1 = Selection.Select(m_Population);
-                    IChromosome parent2 = Selection.Select(m_Population);
+                    IChromosome parent1 = Selection.Select(Population);
+                    IChromosome parent2 = Selection.Select(Population);
 
-                    IChromosome offspring1, offspring2;
-                    Crossover.Crossover(parent1, parent2, out offspring1, out offspring2);
+                    Crossover.Crossover(parent1, parent2, out IChromosome offspring1, out IChromosome offspring2);
 
-                    Mutation.Mutate(ref offspring1, min, max);
-                    Mutation.Mutate(ref offspring2, min, max);
+                    Mutation.Mutate(ref offspring1);
+                    Mutation.Mutate(ref offspring2);
 
-                    m_Population.AddChromosomeInNewPopulation(offspring1);
-                    m_Population.AddChromosomeInNewPopulation(offspring2);
+                    Population.AddChromosomeInNewPopulation(offspring1);
+                    Population.AddChromosomeInNewPopulation(offspring2);
 
-                } while (!m_Population.IsFullNewGeneration);
+                } while (!Population.IsFullNewGeneration);
 
-                m_Population.SwapGeneration();
-                m_Population.Evaluate(Fitness);
-                Debug.Log(m_Population);
+                Population.SwapGeneration();
+                Population.Evaluate(Fitness);
+
+                if (Debug != null)
+                    Debug.Log(Population);
             }
-
         }
     }
 }

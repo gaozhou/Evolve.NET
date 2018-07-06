@@ -2,7 +2,7 @@
 
 namespace Evolve.NET.Core
 {
-    public class Chromosome : IChromosome, IComparable<IChromosome>
+    public class Chromosome : IChromosome
     {
         private int[] m_Genes;
 
@@ -12,12 +12,7 @@ namespace Evolve.NET.Core
             set { m_Genes[index] = value; }
         }
 
-        private float m_Fitness;
-
-        public float Fitness
-        {
-            get { return m_Fitness; }
-        }
+        public double Fitness { get; private set; }
 
         public int[] Genes
         {
@@ -50,12 +45,18 @@ namespace Evolve.NET.Core
 
         public int CompareTo(IChromosome other)
         {
-            return m_Fitness.CompareTo(other.Fitness);
+            if (Fitness > other.Fitness)
+                return -1;
+
+            if (Fitness < other.Fitness)
+                return 1;
+
+            return 0;
         }
 
         public void EvaluateFitness(IFitness function)
         {
-            m_Fitness = function.Evaluate(this);
+            Fitness = function.Evaluate(this);
         }
 
         public override bool Equals(object obj)

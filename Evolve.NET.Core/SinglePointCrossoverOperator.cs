@@ -1,10 +1,10 @@
 ﻿namespace Evolve.NET.Core
 {
-    public class OnePointCrossoverOperator : ICrossover
+    public class SinglePointCrossoverOperator : ICrossover
     {
-        private float m_CrossoverRate;
+        private double m_CrossoverRate;
 
-        public OnePointCrossoverOperator(float croosoverRate)
+        public SinglePointCrossoverOperator(double croosoverRate)
         {
             m_CrossoverRate = croosoverRate;
         }
@@ -14,7 +14,7 @@
             offspring1 = new Chromosome(parent1.Genes);
             offspring2 = new Chromosome(parent2.Genes);
 
-            if (Helper.RandomFloat() < m_CrossoverRate)
+            if (Helper.RandomDouble() < m_CrossoverRate)
             {
                 int cutoffPoint = Helper.RandomInt(0, parent1.Length);
 

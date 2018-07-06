@@ -2,6 +2,6 @@
 {
     public interface IFitness
     {
-        float Evaluate(IChromosome chromosome);
+        double Evaluate(IChromosome chromosome);
     }
 }

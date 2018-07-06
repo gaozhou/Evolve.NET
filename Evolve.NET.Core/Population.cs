@@ -58,6 +58,8 @@ namespace Evolve.NET.Core
         {
             foreach (IChromosome chromosome in m_Chromosomes)
                 chromosome.EvaluateFitness(fitnessFunction);
+
+            m_Chromosomes.Sort();
         }
 
         public Population(string fileName)

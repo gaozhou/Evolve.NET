@@ -20,10 +20,10 @@ namespace Evolve.NET.Core
             return m_Random.Next(min, max + 1);
         }
 
-        public static float RandomFloat()
+        public static double RandomDouble()
         {
             InitializeRandom();
-            return (float)m_Random.NextDouble();
+            return m_Random.NextDouble();
         }
     }
 }

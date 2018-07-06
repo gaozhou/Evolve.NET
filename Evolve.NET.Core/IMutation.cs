@@ -2,6 +2,6 @@
 {
     public interface IMutation
     {
-        void Mutate(ref IChromosome chromosome, int min, int max);
+        void Mutate(ref IChromosome chromosome);
     }
 }

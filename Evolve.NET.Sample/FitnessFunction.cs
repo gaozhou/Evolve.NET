@@ -11,7 +11,7 @@ namespace Evolve.NET.Sample
             area = width * height;
         }
 
-        public float Evaluate(IChromosome chromosome)
+        public double Evaluate(IChromosome chromosome)
         {
             int sum = 0;
             for (int i = 0; i < chromosome.Length; i++)

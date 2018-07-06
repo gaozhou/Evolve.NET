@@ -1,6 +1,8 @@
-﻿namespace Evolve.NET.Core
+﻿using System;
+
+namespace Evolve.NET.Core
 {
-    public interface IChromosome
+    public interface IChromosome : IComparable<IChromosome>
     {
         int this[int index] { get; set; }
 
@@ -8,7 +10,7 @@
 
         int Length { get; }
 
-        float Fitness { get; }
+        double Fitness { get; }
 
         void EvaluateFitness(IFitness function);
     }
