@@ -10,10 +10,15 @@ namespace Evolve.NET.Sample
         public SingleConsoleDebug(int height)
         {
             m_Heigth = height;
+
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
         }
 
         public void Log(IPopulation population)
         {
+            Console.WriteLine("Generation {0}\t Fitness {1}", population.Generation, population[0].Fitness);
+            /*
             Console.BackgroundColor = ConsoleColor.Black;
             Console.WriteLine("Generation {0}\t Fitness {1}", population.Generation, population[0].Fitness);
 
@@ -31,6 +36,7 @@ namespace Evolve.NET.Sample
 
             Console.BackgroundColor = ConsoleColor.Black;
             Console.WriteLine(" ");
+            */
         }
     }
 }
