@@ -1,9 +1,5 @@
 ﻿using Evolve.NET.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Evolve.NET.Sample
 {
@@ -11,12 +7,12 @@ namespace Evolve.NET.Sample
     {
         public static void Main(string[] args)
         {
-            const int POPULATION_SIZE = 10;
+            const int POPULATION_SIZE = 20;
             const int CHROMOSOME_SIZE = 16;
             const int GENE_MIN = 0;
             const int GENE_MAX = 1;
-            const int MAX_GENERATIONS = 1000;
-            const int ELITIMS_NUMBER = 1;
+            const int MAX_GENERATIONS = 200;
+            const int ELITIMS_NUMBER = 3;
             const int TOURNAMENT_NUMBER = 3;
             const double CROSSOVER_RATE = 0.8;
             const double MUTATION_RATE = 0.02;

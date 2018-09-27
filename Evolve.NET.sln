@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve.NET.Core", "Evolve.NET.Core\Evolve.NET.Core.csproj", "{959EEA71-B14E-49FA-81AF-2A1F90E39D52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve.NET.Sample", "Evolve.NET.Sample\Evolve.NET.Sample.csproj", "{7B013B23-DABD-4D67-9B7F-02DCD2ACFDA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve.NET.Sample.Math", "Evolve.NET.Sample.Math\Evolve.NET.Sample.Math.csproj", "{7B013B23-DABD-4D67-9B7F-02DCD2ACFDA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
