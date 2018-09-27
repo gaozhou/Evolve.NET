@@ -3,5 +3,7 @@
     public interface IDebug
     {
         void Log(IPopulation population);
+
+        void Log(IChromosome chromosome);
     }
 }

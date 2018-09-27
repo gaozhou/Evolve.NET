@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Evolve.NET.Core
 {
@@ -6,7 +8,7 @@ namespace Evolve.NET.Core
     {
         private List<IChromosome> m_Chromosomes;
 
-        private HashSet<IChromosome> m_TempChromosomes;
+        private List<IChromosome> m_TempChromosomes;
 
         public IChromosome this[int index]
         {
@@ -29,7 +31,7 @@ namespace Evolve.NET.Core
         public void AddChromosomeInNewPopulation(IChromosome chromosome)
         {
             if (m_TempChromosomes == null)
-                m_TempChromosomes = new HashSet<IChromosome>();
+                m_TempChromosomes = new List<IChromosome>();
 
             if (IsFullNewGeneration)
                 return;
@@ -42,9 +44,37 @@ namespace Evolve.NET.Core
 
         }
 
-        private void Save()
+        public void Save(string filename, bool append)
         {
+            using (StreamWriter outputFile = new StreamWriter(filename, append))
+            {
+                double best = 0;
+                double average = 0;
 
+                for (int i = 0; i < m_Chromosomes.Count; i++)
+                {
+                    average += m_Chromosomes[i].Fitness;
+
+                    if (best < m_Chromosomes[i].Fitness)
+                        best = m_Chromosomes[i].Fitness;
+                }
+
+                average /= (double)m_Chromosomes.Count;
+
+                outputFile.WriteLine("{0}\t{1}", average, best);
+            }
+        }
+
+        public void Elite(int elitismNumber)
+        {
+            if (elitismNumber <= 0)
+                return;
+
+            List<IChromosome> chromosomes = new List<IChromosome>(m_Chromosomes);
+            chromosomes.Sort();
+
+            for (int i = 0; i < elitismNumber; i++)
+                AddChromosomeInNewPopulation(chromosomes[i]);
         }
 
         public void SwapGeneration()
@@ -59,7 +89,7 @@ namespace Evolve.NET.Core
             foreach (IChromosome chromosome in m_Chromosomes)
                 chromosome.EvaluateFitness(fitnessFunction);
 
-            m_Chromosomes.Sort();
+            //m_Chromosomes.Sort();
         }
 
         public Population(string fileName)
@@ -71,7 +101,7 @@ namespace Evolve.NET.Core
         {
             Generation = 0;
 
-            HashSet<IChromosome> temp = new HashSet<IChromosome>();
+            List<IChromosome> temp = new List<IChromosome>();
             while (temp.Count < count)
             {
                 temp.Add(new Chromosome(length, min, max));

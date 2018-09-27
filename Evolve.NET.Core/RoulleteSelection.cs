@@ -6,8 +6,8 @@
         {
             IChromosome chromosome = null;
             double[] probabilities = GetProbabilities(population);
-            double point = Helper.RandomDouble();
-            double accumulation = 0.0f;
+            double point = RandomHelper.RandomDouble();
+            double accumulation = 0.0;
             for (int i = 0; i < population.Count; i++)
             {
                 accumulation += probabilities[i];
@@ -23,7 +23,7 @@
 
         private double[] GetProbabilities(IPopulation population)
         {
-            double sum = 0.0f;
+            double sum = 0.0;
             for (int i = 0; i < population.Count; i++)
                 sum += population[i].Fitness;
 

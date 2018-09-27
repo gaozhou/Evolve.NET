@@ -41,8 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chromosome.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="RandomHelper.cs" />
     <Compile Include="IChromosome.cs" />
+    <Compile Include="ISortFitnessComparer.cs" />
     <Compile Include="ICrossover.cs" />
     <Compile Include="IDebug.cs" />
     <Compile Include="IFitness.cs" />
@@ -50,11 +51,14 @@
     <Compile Include="IMutation.cs" />
     <Compile Include="IPopulation.cs" />
     <Compile Include="ISelection.cs" />
-    <Compile Include="SinglePointCrossoverOperator.cs" />
+    <Compile Include="OnePointCrossoverOperator.cs" />
     <Compile Include="Population.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomResettingMutationOperator.cs" />
+    <Compile Include="ResetingRandomMutationOperator.cs" />
     <Compile Include="RoulleteSelection.cs" />
+    <Compile Include="SortFitnessMax.cs" />
+    <Compile Include="SortFitnessMin.cs" />
+    <Compile Include="TournamentSelection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

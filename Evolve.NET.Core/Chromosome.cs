@@ -4,15 +4,27 @@ namespace Evolve.NET.Core
 {
     public class Chromosome : IChromosome
     {
+        #region [ Fields ]
         private int[] m_Genes;
 
+        private double m_Fitness;
+
+        private ISortFitnessComparer m_Comparer;
+        #endregion
+
+        #region [ Indexer ]
         public int this[int index]
         {
             get { return m_Genes[index]; }
             set { m_Genes[index] = value; }
         }
+        #endregion
 
-        public double Fitness { get; private set; }
+        #region [ Properties ]
+        public double Fitness
+        {
+            get { return m_Fitness; }
+        }
 
         public int[] Genes
         {
@@ -24,41 +36,47 @@ namespace Evolve.NET.Core
             get { return m_Genes.Length; }
         }
 
+        public ISortFitnessComparer Comparer
+        {
+            get { return m_Comparer; }
+            set { m_Comparer = value; }
+        }
+
+        #endregion
+
+        #region [ Constructor ]
         public Chromosome(int length, int min, int max)
         {
             m_Genes = new int[length];
             for (int i = 0; i < length; i++)
-                m_Genes[i] = Helper.RandomInt(min, max);
+                m_Genes[i] = RandomHelper.RandomInt(min, max);
+
+            m_Comparer = new SortFitnessMax();
         }
 
         public Chromosome(int[] genes)
         {
             m_Genes = new int[genes.Length];
             Array.ConstrainedCopy(genes, 0, m_Genes, 0, genes.Length);
+
+            m_Comparer = new SortFitnessMax();
         }
 
         public Chromosome(Chromosome chromosome)
             : this(chromosome.Genes)
         {
-
+            m_Comparer = new SortFitnessMax();
         }
+        #endregion
 
-        public int CompareTo(IChromosome other)
-        {
-            if (Fitness > other.Fitness)
-                return -1;
-
-            if (Fitness < other.Fitness)
-                return 1;
-
-            return 0;
-        }
-
+        #region [ Methods ] 
         public void EvaluateFitness(IFitness function)
         {
-            Fitness = function.Evaluate(this);
+            m_Fitness = function.Evaluate(this);
         }
+        #endregion
 
+        #region [ Overrides ]
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
@@ -84,6 +102,11 @@ namespace Evolve.NET.Core
             }
         }
 
+        public int CompareTo(IChromosome other)
+        {
+            return m_Comparer.Compare(this, other);
+        }
+
         public static bool operator ==(Chromosome a, Chromosome b)
         {
             return a.Equals(b);
@@ -93,5 +116,6 @@ namespace Evolve.NET.Core
         {
             return !(a == b);
         }
+        #endregion
     }
 }

@@ -15,5 +15,9 @@
         void SwapGeneration();
 
         void Evaluate(IFitness fitnessFunction);
+
+        void Elite(int elitismNumber);
+
+        void Save(string filename, bool append);
     }
 }

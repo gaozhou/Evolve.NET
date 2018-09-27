@@ -12,6 +12,8 @@ namespace Evolve.NET.Core
 
         double Fitness { get; }
 
+        ISortFitnessComparer Comparer { get; set; }
+
         void EvaluateFitness(IFitness function);
     }
 }

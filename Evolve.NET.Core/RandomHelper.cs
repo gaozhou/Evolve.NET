@@ -2,7 +2,7 @@
 
 namespace Evolve.NET.Core
 {
-    public static class Helper
+    public static class RandomHelper
     {
         private static readonly int RANDOM_SEED = 10;
 

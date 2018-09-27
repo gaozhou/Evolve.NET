@@ -1,23 +1,26 @@
 ﻿using Evolve.NET.Core;
+using System;
 
 namespace Evolve.NET.Sample
 {
     public class FitnessFunction : IFitness
     {
-        private int area;
-
-        public FitnessFunction(int width, int height)
-        {
-            area = width * height;
-        }
-
         public double Evaluate(IChromosome chromosome)
         {
-            int sum = 0;
-            for (int i = 0; i < chromosome.Length; i++)
-                sum += chromosome[i];
+            return Math.Pow(ConvertArrayToDecimal(chromosome.Genes), 2);
+        }
 
-            return area - sum;
+        private long ConvertArrayToDecimal(int[] genes)
+        {
+            long value = 0;
+
+            for (int i = 0; i < genes.Length; i++)
+            {
+                long exp = genes.Length - i - 1;
+                value += (long)Math.Pow(2, exp) * genes[i];
+            }
+
+            return value;
         }
     }
 }
