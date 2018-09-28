@@ -26,7 +26,8 @@ namespace Evolve.NET.Sample.Math
                 Fitness = new FitnessFunction(),
                 Elitism = ELITIMS_NUMBER,
                 Filename = FILENAME,
-                Debug = new ConsoleDebug()
+                Debug = new ConsoleDebug(),
+                DebugMask = DebugMask.First | DebugMask.Step
             };
 
             simulator.Simulate(POPULATION_SIZE, CHROMOSOME_SIZE, GENE_MIN, GENE_MAX, MAX_GENERATIONS);

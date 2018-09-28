@@ -7,11 +7,11 @@ namespace Evolve.NET.Sample.LevelGenerator
     {
         public static void Main(string[] args)
         {
-            const int POPULATION_SIZE = 100;
+            const int POPULATION_SIZE = 200;
             const int CHROMOSOME_SIZE = 50;
             const int GENE_MIN = 0;
             const int GENE_MAX = 25;
-            const int MAX_GENERATIONS = 1000;
+            const int MAX_GENERATIONS = 2000;
             const int ELITIMS_NUMBER = 20;
             const int TOURNAMENT_NUMBER = 3;
             const double CROSSOVER_RATE = 0.8;

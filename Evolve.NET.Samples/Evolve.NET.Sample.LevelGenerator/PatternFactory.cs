@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Evolve.NET.Sample.LevelGenerator
+﻿namespace Evolve.NET.Sample.LevelGenerator
 {
     public class PatternFactory
     {
