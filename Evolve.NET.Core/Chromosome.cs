@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Evolve.NET.Core
 {
@@ -105,6 +106,16 @@ namespace Evolve.NET.Core
         public int CompareTo(IChromosome other)
         {
             return m_Comparer.Compare(this, other);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("[");
+            Array.ForEach(m_Genes, x => builder.Append(x).Append("|"));
+            builder.Remove(builder.Length -1, 1);
+            builder.Append("]");
+            return builder.ToString();
         }
 
         public static bool operator ==(Chromosome a, Chromosome b)

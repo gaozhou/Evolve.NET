@@ -1,13 +1,12 @@
 ﻿using Evolve.NET.Core;
-using System;
 
-namespace Evolve.NET.Sample
+namespace Evolve.NET.Sample.Math
 {
     public class FitnessFunction : IFitness
     {
         public double Evaluate(IChromosome chromosome)
         {
-            return Math.Pow(ConvertArrayToDecimal(chromosome.Genes), 2);
+            return System.Math.Pow(ConvertArrayToDecimal(chromosome.Genes), 2);
         }
 
         private long ConvertArrayToDecimal(int[] genes)
@@ -17,7 +16,7 @@ namespace Evolve.NET.Sample
             for (int i = 0; i < genes.Length; i++)
             {
                 long exp = genes.Length - i - 1;
-                value += (long)Math.Pow(2, exp) * genes[i];
+                value += (long)System.Math.Pow(2, exp) * genes[i];
             }
 
             return value;

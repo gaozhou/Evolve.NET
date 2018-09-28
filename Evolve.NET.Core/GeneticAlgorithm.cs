@@ -4,6 +4,8 @@
     {
         private IPopulation m_Population;
 
+        public DebugMask DebugMask { get; set; }
+
         public ISelection Selection { get; set; }
 
         public ICrossover Crossover { get; set; }
@@ -18,13 +20,19 @@
 
         public string Filename { get; set; }
 
+        public GeneticAlgorithm()
+        {
+            DebugMask = DebugMask.None;
+        }
+
         public void Simulate(int count, int length, int min, int max, int maxGeneration)
         {
             m_Population = new Population(count, length, min, max);
             m_Population.Evaluate(Fitness);
 
             m_Population.Save(Filename, false);
-            Debug.Log(m_Population);
+            if (Debug != null && (DebugMask & DebugMask.First) != 0)
+                Debug.Log(m_Population);
 
             while (m_Population.Generation < maxGeneration)
             {
@@ -50,9 +58,12 @@
                 m_Population.Evaluate(Fitness);
 
                 m_Population.Save(Filename, true);
-                Debug.Log(m_Population);
+                if (Debug != null && (DebugMask & DebugMask.Step) != 0)
+                    Debug.Log(m_Population);
             }
 
+            if (Debug != null && (DebugMask & DebugMask.Last) != 0)
+                Debug.Log(m_Population);
         }
     }
 }

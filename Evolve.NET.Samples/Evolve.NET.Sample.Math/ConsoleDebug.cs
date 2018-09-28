@@ -1,7 +1,7 @@
 ﻿using Evolve.NET.Core;
 using System;
 
-namespace Evolve.NET.Sample
+namespace Evolve.NET.Sample.Math
 {
     public class ConsoleDebug : IDebug
     {
@@ -19,8 +19,7 @@ namespace Evolve.NET.Sample
 
         public void Log(IChromosome chromosome)
         {
-            for (int i = 0; i < chromosome.Length; i++)
-                Console.Write("{0}", chromosome[i]);
+            Console.Write("{0}", chromosome.ToString());
         }
     }
 }

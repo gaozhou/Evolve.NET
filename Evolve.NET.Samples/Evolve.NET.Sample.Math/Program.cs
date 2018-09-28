@@ -1,7 +1,7 @@
 ﻿using Evolve.NET.Core;
 using System;
 
-namespace Evolve.NET.Sample
+namespace Evolve.NET.Sample.Math
 {
     public class Program
     {
@@ -18,17 +18,16 @@ namespace Evolve.NET.Sample
             const double MUTATION_RATE = 0.02;
             const string FILENAME = "sample_result.xls";
 
-            GeneticAlgorithm simulator = new GeneticAlgorithm();
-
-            simulator.Selection = new TournamentSelection(TOURNAMENT_NUMBER);
-            simulator.Crossover = new OnePointCrossoverOperator(CROSSOVER_RATE);
-            simulator.Mutation = new ResetingRandomMutationOperator(MUTATION_RATE);
-            simulator.Fitness = new FitnessFunction();
-
-            simulator.Elitism = ELITIMS_NUMBER;
-            simulator.Filename = FILENAME;
-
-            simulator.Debug = new ConsoleDebug();
+            GeneticAlgorithm simulator = new GeneticAlgorithm
+            {
+                Selection = new TournamentSelection(TOURNAMENT_NUMBER),
+                Crossover = new OnePointCrossoverOperator(CROSSOVER_RATE),
+                Mutation = new ResetingRandomMutationOperator(MUTATION_RATE),
+                Fitness = new FitnessFunction(),
+                Elitism = ELITIMS_NUMBER,
+                Filename = FILENAME,
+                Debug = new ConsoleDebug()
+            };
 
             simulator.Simulate(POPULATION_SIZE, CHROMOSOME_SIZE, GENE_MIN, GENE_MAX, MAX_GENERATIONS);
 
