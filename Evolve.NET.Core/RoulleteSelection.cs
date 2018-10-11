@@ -1,10 +1,10 @@
 ﻿namespace Evolve.NET.Core
 {
-    public class RoulleteSelectionMethod : ISelection
+    public class RoulleteSelectionMethod<T> : ISelection<T>
     {
-        public IChromosome Select(IPopulation population)
+        public IChromosome<T> Select(IPopulation<T> population)
         {
-            IChromosome chromosome = null;
+            IChromosome<T> chromosome = null;
             double[] probabilities = GetProbabilities(population);
             double point = RandomHelper.RandomDouble();
             double accumulation = 0.0;
@@ -13,7 +13,7 @@
                 accumulation += probabilities[i];
                 if (point < accumulation)
                 {
-                    chromosome = new Chromosome((Chromosome)population[i]);
+                    chromosome = new Chromosome<T>((Chromosome<T>)population[i]);
                     break;
                 }
             }
@@ -21,7 +21,7 @@
             return chromosome;
         }
 
-        private double[] GetProbabilities(IPopulation population)
+        private double[] GetProbabilities(IPopulation<T> population)
         {
             double sum = 0.0;
             for (int i = 0; i < population.Count; i++)

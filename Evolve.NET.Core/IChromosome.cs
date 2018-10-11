@@ -2,18 +2,18 @@
 
 namespace Evolve.NET.Core
 {
-    public interface IChromosome : IComparable<IChromosome>
+    public interface IChromosome<T> : IComparable<IChromosome<T>>
     {
-        int this[int index] { get; set; }
+        T this[int index] { get; set; }
 
-        int[] Genes { get; }
+        T[] Genes { get; }
 
         int Length { get; }
 
         double Fitness { get; }
 
-        ISortFitnessComparer Comparer { get; set; }
+        ISortFitnessComparer<T> Comparer { get; set; }
 
-        void EvaluateFitness(IFitness function);
+        void EvaluateFitness(IFitness<T> function);
     }
 }

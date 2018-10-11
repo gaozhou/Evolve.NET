@@ -1,7 +1,7 @@
 ﻿namespace Evolve.NET.Core
 {
-    public interface IFitness
+    public interface IFitness<T>
     {
-        double Evaluate(IChromosome chromosome);
+        double Evaluate(IChromosome<T> chromosome);
     }
 }

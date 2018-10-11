@@ -4,7 +4,7 @@ namespace Evolve.NET.Sample.LevelGenerator
 {
     public class FitnessFunction : IFitness
     {
-        public double Evaluate(IChromosome chromosome)
+        public double Evaluate(IChromosome<T> chromosome)
         {
             double fitness = 0;
             for (int i = 0; i < chromosome.Length; i++)

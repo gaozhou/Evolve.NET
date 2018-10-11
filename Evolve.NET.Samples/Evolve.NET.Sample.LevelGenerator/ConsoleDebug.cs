@@ -29,7 +29,7 @@ namespace Evolve.NET.Sample.LevelGenerator
             }
         }
 
-        public void Log(IChromosome chromosome)
+        public void Log(IChromosome<T> chromosome)
         {
             Console.BackgroundColor = ConsoleColor.Black;
             //Console.WriteLine(chromosome.ToString());

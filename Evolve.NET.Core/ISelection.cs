@@ -1,7 +1,7 @@
 ﻿namespace Evolve.NET.Core
 {
-    public interface ISelection
+    public interface ISelection<T>
     {
-        IChromosome Select(IPopulation population);
+        IChromosome<T> Select(IPopulation<T> population);
     }
 }

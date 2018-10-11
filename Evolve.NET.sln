@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve.NET.Core", "Evolve.N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve.NET.Sample.Math", "Evolve.NET.Samples\Evolve.NET.Sample.Math\Evolve.NET.Sample.Math.csproj", "{7B013B23-DABD-4D67-9B7F-02DCD2ACFDA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolve.NET.Sample.LevelGenerator", "Evolve.NET.Samples\Evolve.NET.Sample.LevelGenerator\Evolve.NET.Sample.LevelGenerator.csproj", "{BA9D3299-8CCE-4F88-AD0B-DC683C7AAA0D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{7B013B23-DABD-4D67-9B7F-02DCD2ACFDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B013B23-DABD-4D67-9B7F-02DCD2ACFDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B013B23-DABD-4D67-9B7F-02DCD2ACFDA8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA9D3299-8CCE-4F88-AD0B-DC683C7AAA0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA9D3299-8CCE-4F88-AD0B-DC683C7AAA0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA9D3299-8CCE-4F88-AD0B-DC683C7AAA0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA9D3299-8CCE-4F88-AD0B-DC683C7AAA0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

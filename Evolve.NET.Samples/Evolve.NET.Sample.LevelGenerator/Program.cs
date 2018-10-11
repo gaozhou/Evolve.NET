@@ -7,12 +7,12 @@ namespace Evolve.NET.Sample.LevelGenerator
     {
         public static void Main(string[] args)
         {
-            const int POPULATION_SIZE = 200;
+            const int POPULATION_SIZE = 10;
             const int CHROMOSOME_SIZE = 50;
             const int GENE_MIN = 0;
             const int GENE_MAX = 25;
             const int MAX_GENERATIONS = 2000;
-            const int ELITIMS_NUMBER = 20;
+            const int ELITIMS_NUMBER = 2;
             const int TOURNAMENT_NUMBER = 3;
             const double CROSSOVER_RATE = 0.8;
             const double MUTATION_RATE = 0.02;
@@ -27,7 +27,7 @@ namespace Evolve.NET.Sample.LevelGenerator
                 Elitism = ELITIMS_NUMBER,
                 Filename = FILENAME,
                 Debug = new ConsoleDebug(),
-                DebugMask = DebugMask.First | DebugMask.Last
+                DebugMask = DebugMask.First | DebugMask.Step
             };
 
             simulator.Simulate(POPULATION_SIZE, CHROMOSOME_SIZE, GENE_MIN, GENE_MAX, MAX_GENERATIONS);

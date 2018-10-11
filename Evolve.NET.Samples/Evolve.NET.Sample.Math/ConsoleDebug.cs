@@ -3,9 +3,9 @@ using System;
 
 namespace Evolve.NET.Sample.Math
 {
-    public class ConsoleDebug : IDebug
+    public class ConsoleDebug<T> : IDebug<T>
     {
-        public void Log(IPopulation population)
+        public void Log(IPopulation<T> population)
         {
             for (int i = 0; i < population.Count; i++)
             {
@@ -17,7 +17,7 @@ namespace Evolve.NET.Sample.Math
             Console.WriteLine();
         }
 
-        public void Log(IChromosome chromosome)
+        public void Log(IChromosome<T> chromosome)
         {
             Console.Write("{0}", chromosome.ToString());
         }

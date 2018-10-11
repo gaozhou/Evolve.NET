@@ -1,6 +1,6 @@
-﻿namespace Evolve.NET.Core
+﻿namespace Evolve.NET.Core.MutationMethods
 {
-    public class ResetingRandomMutationOperator : IMutation
+    public class ResetingRandomMutationOperator<T> : IMutation<T>
     {
         private double m_MutateRate;
 
@@ -9,12 +9,12 @@
             m_MutateRate = mutateRate;
         }
 
-        public void Mutate(ref IChromosome chromosome, int min, int max)
+        public void Mutate(ref IChromosome<T> chromosome, int min, int max)
         {
             if (RandomHelper.RandomDouble() < m_MutateRate)
             {
                 int index = RandomHelper.RandomInt(0, chromosome.Length - 1);
-                chromosome[index] = RandomHelper.RandomInt(min, max);
+                chromosome[index] = (T)(object)RandomHelper.RandomInt(min, max);
             }
         }
     }

@@ -2,7 +2,7 @@
 
 namespace Evolve.NET.Core
 {
-    public interface ISortFitnessComparer : IComparer<IChromosome>
+    public interface ISortFitnessComparer<T> : IComparer<IChromosome<T>>
     {
     }
 }

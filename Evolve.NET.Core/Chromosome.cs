@@ -3,18 +3,18 @@ using System.Text;
 
 namespace Evolve.NET.Core
 {
-    public class Chromosome : IChromosome
+    public class Chromosome<T> : IChromosome<T>
     {
         #region [ Fields ]
-        private int[] m_Genes;
+        private T[] m_Genes;
 
         private double m_Fitness;
 
-        private ISortFitnessComparer m_Comparer;
+        private ISortFitnessComparer<T> m_Comparer;
         #endregion
 
         #region [ Indexer ]
-        public int this[int index]
+        public T this[int index]
         {
             get { return m_Genes[index]; }
             set { m_Genes[index] = value; }
@@ -27,7 +27,7 @@ namespace Evolve.NET.Core
             get { return m_Fitness; }
         }
 
-        public int[] Genes
+        public T[] Genes
         {
             get { return m_Genes; }
         }
@@ -37,7 +37,7 @@ namespace Evolve.NET.Core
             get { return m_Genes.Length; }
         }
 
-        public ISortFitnessComparer Comparer
+        public ISortFitnessComparer<T> Comparer
         {
             get { return m_Comparer; }
             set { m_Comparer = value; }
@@ -48,30 +48,30 @@ namespace Evolve.NET.Core
         #region [ Constructor ]
         public Chromosome(int length, int min, int max)
         {
-            m_Genes = new int[length];
+            m_Genes = new T[length];
             for (int i = 0; i < length; i++)
-                m_Genes[i] = RandomHelper.RandomInt(min, max);
-
-            m_Comparer = new SortFitnessMax();
+                m_Genes[i] = (T)(object)RandomHelper.RandomInt(min, max);
+            //  ▲ melhorar
+            m_Comparer = new SortFitnessMax<T>();
         }
 
-        public Chromosome(int[] genes)
+        public Chromosome(T[] genes)
         {
-            m_Genes = new int[genes.Length];
+            m_Genes = new T[genes.Length];
             Array.ConstrainedCopy(genes, 0, m_Genes, 0, genes.Length);
 
-            m_Comparer = new SortFitnessMax();
+            m_Comparer = new SortFitnessMax<T>();
         }
 
-        public Chromosome(Chromosome chromosome)
+        public Chromosome(Chromosome<T> chromosome)
             : this(chromosome.Genes)
         {
-            m_Comparer = new SortFitnessMax();
+            m_Comparer = new SortFitnessMax<T>();
         }
         #endregion
 
         #region [ Methods ] 
-        public void EvaluateFitness(IFitness function)
+        public void EvaluateFitness(IFitness<T> function)
         {
             m_Fitness = function.Evaluate(this);
         }
@@ -83,9 +83,9 @@ namespace Evolve.NET.Core
             if (obj == null || GetType() != obj.GetType())
                 return false;
 
-            IChromosome chromosome = (IChromosome)obj;
+            IChromosome<T> chromosome = (Chromosome<T>)obj;
             for (int i = 0; i < Length; i++)
-                if (Genes[i] != chromosome[i])
+                if (!Genes[i].Equals(chromosome[i]))
                     return false;
 
             return true;
@@ -96,14 +96,14 @@ namespace Evolve.NET.Core
             unchecked
             {
                 int hash = 17;
-                foreach (int alelo in m_Genes)
+                foreach (T alelo in m_Genes)
                     hash = hash * alelo.GetHashCode();
 
                 return hash;
             }
         }
 
-        public int CompareTo(IChromosome other)
+        public int CompareTo(IChromosome<T> other)
         {
             return m_Comparer.Compare(this, other);
         }
@@ -118,12 +118,12 @@ namespace Evolve.NET.Core
             return builder.ToString();
         }
 
-        public static bool operator ==(Chromosome a, Chromosome b)
+        public static bool operator ==(Chromosome<T> a, Chromosome<T> b)
         {
             return a.Equals(b);
         }
 
-        public static bool operator !=(Chromosome a, Chromosome b)
+        public static bool operator !=(Chromosome<T> a, Chromosome<T> b)
         {
             return !(a == b);
         }

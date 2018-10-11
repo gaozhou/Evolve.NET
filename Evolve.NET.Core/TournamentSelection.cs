@@ -2,7 +2,7 @@
 
 namespace Evolve.NET.Core
 {
-    public class TournamentSelection : ISelection
+    public class TournamentSelection<T> : ISelection<T>
     {
         private const int TOURNAMENT_SIZE = 3;
 
@@ -13,14 +13,14 @@ namespace Evolve.NET.Core
             m_TournamentSize = tournamentSize;
         }
 
-        public IChromosome Select(IPopulation population)
+        public IChromosome<T> Select(IPopulation<T> population)
         {
-            List<IChromosome> chromosomes = new List<IChromosome>();
+            List<IChromosome<T>> chromosomes = new List<IChromosome<T>>();
 
             for (int i = 0; i < m_TournamentSize; i++)
             {
                 int randomIndex = RandomHelper.RandomInt(0, population.Count - 1);
-                IChromosome chromosome = new Chromosome((Chromosome)population[randomIndex]);
+                IChromosome<T> chromosome = new Chromosome<T>((Chromosome<T>)population[randomIndex]);
                 chromosomes.Add(chromosome);
             }
 

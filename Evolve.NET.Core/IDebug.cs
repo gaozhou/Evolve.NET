@@ -2,11 +2,11 @@
 
 namespace Evolve.NET.Core
 {
-    public interface IDebug
+    public interface IDebug<T>
     {
-        void Log(IPopulation population);
+        void Log(IPopulation<T> population);
 
-        void Log(IChromosome chromosome);
+        void Log(IChromosome<T> chromosome);
     }
 
     [Flags]

@@ -1,22 +1,25 @@
-﻿namespace Evolve.NET.Core
+﻿using Evolve.NET.Core.CrossoverMethods;
+using Evolve.NET.Core.MutationMethods;
+
+namespace Evolve.NET.Core
 {
-    public class GeneticAlgorithm
+    public class GeneticAlgorithm<T>
     {
-        private IPopulation m_Population;
+        private IPopulation<T> m_Population;
 
         public DebugMask DebugMask { get; set; }
 
-        public ISelection Selection { get; set; }
+        public ISelection<T> Selection { get; set; }
 
-        public ICrossover Crossover { get; set; }
+        public ICrossover<T> Crossover { get; set; }
 
-        public IMutation Mutation { get; set; }
+        public IMutation<T> Mutation { get; set; }
 
-        public IFitness Fitness { get; set; }
+        public IFitness<T> Fitness { get; set; }
 
         public int Elitism { get; set; }
 
-        public IDebug Debug { get; set; }
+        public IDebug<T> Debug { get; set; }
 
         public string Filename { get; set; }
 
@@ -27,7 +30,7 @@
 
         public void Simulate(int count, int length, int min, int max, int maxGeneration)
         {
-            m_Population = new Population(count, length, min, max);
+            m_Population = new Population<T>(count, length, min, max);
             m_Population.Evaluate(Fitness);
 
             m_Population.Save(Filename, false);
@@ -40,10 +43,10 @@
 
                 do
                 {
-                    IChromosome parent1 = Selection.Select(m_Population);
-                    IChromosome parent2 = Selection.Select(m_Population);
+                    IChromosome<T> parent1 = Selection.Select(m_Population);
+                    IChromosome<T> parent2 = Selection.Select(m_Population);
 
-                    IChromosome offspring1, offspring2;
+                    IChromosome<T> offspring1, offspring2;
                     Crossover.Crossover(parent1, parent2, out offspring1, out offspring2);
 
                     Mutation.Mutate(ref offspring1, min, max);

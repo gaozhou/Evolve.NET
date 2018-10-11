@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Evolve.NET.Core</RootNamespace>
     <AssemblyName>Evolve.NET.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,17 +45,17 @@
     <Compile Include="RandomHelper.cs" />
     <Compile Include="IChromosome.cs" />
     <Compile Include="ISortFitnessComparer.cs" />
-    <Compile Include="ICrossover.cs" />
+    <Compile Include="CrossoverMethods\ICrossover.cs" />
     <Compile Include="IDebug.cs" />
     <Compile Include="IFitness.cs" />
     <Compile Include="GeneticAlgorithm.cs" />
-    <Compile Include="IMutation.cs" />
+    <Compile Include="MutationMethods\IMutation.cs" />
     <Compile Include="IPopulation.cs" />
     <Compile Include="ISelection.cs" />
-    <Compile Include="OnePointCrossoverOperator.cs" />
+    <Compile Include="CrossoverMethods\OnePointCrossoverOperator.cs" />
     <Compile Include="Population.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResetingRandomMutationOperator.cs" />
+    <Compile Include="MutationMethods\ResetingRandomMutationOperator.cs" />
     <Compile Include="RoulleteSelection.cs" />
     <Compile Include="SortFitnessMax.cs" />
     <Compile Include="SortFitnessMin.cs" />

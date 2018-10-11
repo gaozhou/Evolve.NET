@@ -4,13 +4,13 @@ using System.IO;
 
 namespace Evolve.NET.Core
 {
-    public class Population : IPopulation
+    public class Population<T> : IPopulation<T>
     {
-        private List<IChromosome> m_Chromosomes;
+        private List<IChromosome<T>> m_Chromosomes;
 
-        private List<IChromosome> m_TempChromosomes;
+        private List<IChromosome<T>> m_TempChromosomes;
 
-        public IChromosome this[int index]
+        public IChromosome<T> this[int index]
         {
             get { return m_Chromosomes[index]; }
             set { m_Chromosomes[index] = value; }
@@ -28,10 +28,10 @@ namespace Evolve.NET.Core
             get { return m_TempChromosomes != null && m_TempChromosomes.Count == Count; }
         }
 
-        public void AddChromosomeInNewPopulation(IChromosome chromosome)
+        public void AddChromosomeInNewPopulation(IChromosome<T> chromosome)
         {
             if (m_TempChromosomes == null)
-                m_TempChromosomes = new List<IChromosome>();
+                m_TempChromosomes = new List<IChromosome<T>>();
 
             if (IsFullNewGeneration)
                 return;
@@ -70,7 +70,7 @@ namespace Evolve.NET.Core
             if (elitismNumber <= 0)
                 return;
 
-            List<IChromosome> chromosomes = new List<IChromosome>(m_Chromosomes);
+            List<IChromosome<T>> chromosomes = new List<IChromosome<T>>(m_Chromosomes);
             chromosomes.Sort();
 
             for (int i = 0; i < elitismNumber; i++)
@@ -80,13 +80,13 @@ namespace Evolve.NET.Core
         public void SwapGeneration()
         {
             Generation++;
-            m_Chromosomes = new List<IChromosome>(m_TempChromosomes);
+            m_Chromosomes = new List<IChromosome<T>>(m_TempChromosomes);
             m_TempChromosomes = null;
         }
 
-        public void Evaluate(IFitness fitnessFunction)
+        public void Evaluate(IFitness<T> fitnessFunction)
         {
-            foreach (IChromosome chromosome in m_Chromosomes)
+            foreach (IChromosome<T> chromosome in m_Chromosomes)
                 chromosome.EvaluateFitness(fitnessFunction);
 
             //m_Chromosomes.Sort();
@@ -101,13 +101,13 @@ namespace Evolve.NET.Core
         {
             Generation = 0;
 
-            List<IChromosome> temp = new List<IChromosome>();
+            List<IChromosome<T>> temp = new List<IChromosome<T>>();
             while (temp.Count < count)
             {
-                temp.Add(new Chromosome(length, min, max));
+                temp.Add(new Chromosome<T>(length, min, max));
             }
 
-            m_Chromosomes = new List<IChromosome>(temp);
+            m_Chromosomes = new List<IChromosome<T>>(temp);
         }
     }
 }
